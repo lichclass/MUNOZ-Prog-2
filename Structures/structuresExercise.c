@@ -15,16 +15,23 @@ Date:           By:         Description:
 /* Main function */
 int main(){
 
-    Nametype myName = {"Munoz", "Nash Adam", 'G'};
-    Studtype myInfo = {myName, 21700005, "BSCS", 1};
-    Studtype myInfo2 = {{"Adams", "Amy", 'G'}, 21800005, "BSCS", 1};
-    Studlist list;
+    Studtype myData1[] = {
+        {{"Munoz", "Nash Adam", 'G'}, 21700005, "BSCS", 1},
+        {{"Adams", "Amy", 'G'}, 21800005, "BSCS", 1},
+        {{"Munoz", "Liza", 'N'}, 8900005, "BSCS", 1}
+    };
 
-    list.count = 1;
-    list.Stud[0] = myInfo;
+    Studtype newStud = {{"Neutron", "Jimmy", 'G'}, 8520023, "BSIT", 1};
+    
+    Studlist list1 = {
+        {myData1[0], myData1[1], myData1[2]}, 
+        3
+    };
+    
 
-    insertFirst_VerOne(&list, myInfo2);
-    displayList(&list);
+    /* Insert Functions to use after this comment */
+    insertFirst_VerTwo(&list1, newStud);
+    displayList(&list1);
 
     return 0;
 }

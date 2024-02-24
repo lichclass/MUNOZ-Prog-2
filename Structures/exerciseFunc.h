@@ -31,5 +31,9 @@ void populateList(Studlist *record, int n);
 int findElem(Studlist *record, unsigned int findID);
 void addStudent(Studlist *record, Studtype student);
 void insertFirst_VerOne(Studlist *record, Studtype student);
+void insertFirst_VerTwo(Studlist *record, Studtype student);
+void deleteStudent(Studlist *record, unsigned int delID);
+void sortList(Studlist *record);
+void insertSorted(Studlist *record, Studtype student);
 
 #endif

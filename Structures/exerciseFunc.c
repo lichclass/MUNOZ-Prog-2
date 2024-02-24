@@ -95,6 +95,7 @@ void displayList(Studlist *record){
         printf("%-15s", record->Stud[i].Course);
         printf("%-10d", record->Stud[i].YrLevel);
     }
+    printf("\n");
 
 }
 
@@ -136,14 +137,14 @@ void populateList(Studlist *record, int n){
 FUNCTION    : int findElem(Studlist *record, unsigned int findID);
 DESCRIPTION : finds the given ID in a list
 ARGUMENTS   : Studlist *record, int n
-RETURNS     : 1 - if FOUND, 0 - if NOT FOUND
+RETURNS     : index - if FOUND, -1 - if NOT FOUND
 ======================================================================
 */
 int findElem(Studlist *record, unsigned int findID){
     int i;
     /* Breaks the loop if the ID is found */
     for(i = 0; i < record->count && findID != record->Stud[i].ID; i++){}
-    return (i < record->count) ? 1 : 0;
+    return (i < record->count) ? i : -1;
 }
 
 
@@ -167,7 +168,7 @@ void addStudent(Studlist *record, Studtype student){
     }
 }
 
-
+/* CHALLENGE: FUNCTION DEFINITIONS */
 
 /*
 ======================================================================
@@ -193,3 +194,93 @@ void insertFirst_VerOne(Studlist *record, Studtype student){
 
 
 
+/*
+======================================================================
+FUNCTION    : void insertFirst_VerTwo(Studlist *record, Studtype student);
+DESCRIPTION : inserts a student record at the index 0 of the given list, using memcpy
+ARGUMENTS   : Studlist *record, Studtype student
+RETURNS     : void
+======================================================================
+*/
+void insertFirst_VerTwo(Studlist *record, Studtype student){
+    if(record->count == SIZE){
+        printf("No space available!");
+    }
+    else {
+        int i;
+        for(i = record->count - 1; i >= 0; i--){
+            memcpy(&record->Stud[i + 1], &record->Stud[i], sizeof(Studtype));
+        }
+        memcpy(&record->Stud[0], &student, sizeof(Studtype));
+        record->count++;
+    }
+}
+
+
+
+/*
+======================================================================
+FUNCTION    : void deleteStudent(Studlist *record, unsigned int delID);
+DESCRIPTION : wil find and remove a student record bearing the given
+              ID from the list.
+ARGUMENTS   : Studlist *record, unsigned int delID
+RETURNS     : void
+======================================================================
+*/
+void deleteStudent(Studlist *record, unsigned int delID){
+    int ndx = findElem(record, delID);
+    if(ndx != -1){
+        int i;
+        for(i = ndx; i < record->count - 1; i++){
+            record->Stud[i] = record->Stud[i + 1];
+        }
+        record->count--;
+    }
+    else {
+        printf("\nStudent not found");
+    }
+}
+
+
+
+/*
+======================================================================
+FUNCTION    : void SortList(Studlist *record);
+DESCRIPTION : sorts the given list in ascending order according to 
+              ID student information
+ARGUMENTS   : Studlist *record
+RETURNS     : void
+======================================================================
+*/
+void sortList(Studlist *record){
+    
+    int i, j;
+    Studtype key;
+    for(i = 1; i < record->count; i++){
+        key = record->Stud[i];
+        
+        for(j = i - 1; j >= 0 && record->Stud[j].ID > key.ID; j--){
+            record->Stud[j + 1] = record->Stud[j];
+        }
+        record->Stud[j + 1] = key;
+    }
+
+}
+
+
+
+/*
+======================================================================
+FUNCTION    : void insertSorted(Studlist *record, Studtype student);
+DESCRIPTION : insert a new student record in its proper position in a 
+              given SORTED list
+ARGUMENTS   : Studlist *record, Studtype student
+RETURNS     : void
+======================================================================
+*/
+void insertSorted(Studlist *record, Studtype student){
+
+    addStudent(record, student);
+    sortList(record);
+
+}
