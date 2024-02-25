@@ -1,7 +1,6 @@
 #ifndef EXERCISEFUNC_H
 #define EXERCISEFUNC_H
 
-#include <stdio.h>
 #define SIZE 50
 
 typedef struct {
