@@ -10,6 +10,7 @@ void insertNew(LIST *L, char New){
     LIST temp;
     temp = (LIST) malloc (sizeof(node));
     temp->chr = New;
+    
     temp->link = *L;
     *L = temp;
 }
