@@ -131,7 +131,7 @@ void selectionSort(STUDLIST *myList){
     for(i = 0; i < myList->cnt - 1; i++){
         int key = i;
         for(j = i + 1; j < myList->cnt; j++){
-            if(myList->list[j].name.LName[0] < myList->list[key].name.LName[0]){
+            if(strcmp(myList->list[j].name.LName, myList->list[key].name.LName) < 0){
                 key = j;
             }
         }

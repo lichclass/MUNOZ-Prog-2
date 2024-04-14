@@ -7,16 +7,16 @@ void swap(int* a, int* b){
 }
 
 void insertion(int arr[], int size){
-    int i, j, temp;
+    int i, j, key;
 
     for(i = 1; i < size; i++){
         
-        temp = arr[i];
+        key = arr[i];
 
-        for(j = i - 1; j >= 0 && arr[j] > temp; j--){
+        for(j = i - 1; j >= 0 && arr[j] > key; j--){
             arr[j + 1] = arr[j];
         }
-        arr[j + 1] = temp;
+        arr[j + 1] = key;
 
     }
 }
